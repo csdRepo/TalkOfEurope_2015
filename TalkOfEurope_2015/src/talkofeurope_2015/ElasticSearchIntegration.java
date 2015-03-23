@@ -42,9 +42,13 @@ public class ElasticSearchIntegration {
                     + " \"sentence\": \""+sentenceID+"\","
                     + " \"document\": \""+document+"\"}";
             
-            try (OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream())) {
+            try {
+                OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
                 out.write(data);
                 out.close();
+            }
+            catch(Exception e){
+                e.printStackTrace();
             }
 
             String line = "";
@@ -75,9 +79,13 @@ public class ElasticSearchIntegration {
             conn.setRequestMethod("POST");
             
             
-            try (OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream())) {
+            try {
+                OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
                 out.write(query);
                 out.close();
+            }
+            catch(Exception e){
+                e.printStackTrace();
             }
 
             String json = "";
@@ -100,7 +108,10 @@ public class ElasticSearchIntegration {
             System.out.println(score);
             
             in.close();
-        } catch (IOException | JSONException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch(JSONException e){
             e.printStackTrace();
         }
     
