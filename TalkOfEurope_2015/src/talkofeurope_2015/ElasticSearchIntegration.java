@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
 import tools.parsing.org.json.JSONException;
 import tools.parsing.org.json.JSONObject;
 
@@ -30,7 +31,48 @@ public class ElasticSearchIntegration {
         
     }
     
-    public void sendToElasticSearch(String text, String sessionday, String firstname, String lastname, String country){
+    public void sendToElasticSearch_en(String text, String sessionday, String firstname, String lastname, String country){
+
+        Random rn = new Random();
+        int answer = rn.nextInt(1000) + 1;
+        
+        try {
+            String url = elasticSearchURI_english + sessionday + "_" + firstname + "_" + lastname + "_" +answer;
+
+            URL obj = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("PUT");
+            String data =  "{\"text\": \""+text+"\","
+                    + " \"sessionday\": \""+sessionday+"\","
+                    + " \"firstname\": \""+firstname+"\","
+                    + " \"lastname\": \""+lastname+"\","
+                    + " \"country\": \""+country+"\"}";
+            
+            try {
+                OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+                out.write(data);
+                out.close();
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+            String line = "";
+            BufferedReader in = new BufferedReader(new 
+                                     InputStreamReader(conn.getInputStream()));
+            
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+            in.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void sendToElasticSearch_el(String text, String sessionday, String firstname, String lastname, String country){
 
         try {
             String url = elasticSearchURI_greek + sessionday;

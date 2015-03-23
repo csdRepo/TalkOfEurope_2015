@@ -51,7 +51,7 @@ public class xmlParser {
                         String lastname=eElement.getElementsByTagName("literal").item(3).getTextContent();
                         String countr=eElement.getElementsByTagName("literal").item(4).getTextContent();;
 			//System.out.println("Salary : " + eElement.getElementsByTagName("literal").item(1).getTextContent());
-                        el.sendToElasticSearch(text, sessionary, firstname, lastname, countr);
+                        el.sendToElasticSearch_en(text, sessionary, firstname, lastname, countr);
 		}
 	}
     } catch (Exception e) {
