@@ -16,10 +16,10 @@ import java.io.File;
  
 public class xmlParser {
    
-  public static void parseit(){  
+  public static void parseit(ElasticSearchIntegration el){  
       
     try {
-        ElasticSearchIntegration el=new ElasticSearchIntegration();
+      //  ElasticSearchIntegration el=new ElasticSearchIntegration();
 	File fXmlFile = new File("/home/jmoschon/Desktop/talk of Europ/ours/talkofeurope.xml");
 	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -51,7 +51,7 @@ public class xmlParser {
                         String lastname=eElement.getElementsByTagName("literal").item(3).getTextContent();
                         String countr=eElement.getElementsByTagName("literal").item(4).getTextContent();;
 			//System.out.println("Salary : " + eElement.getElementsByTagName("literal").item(1).getTextContent());
-                        
+                        el.sendToElasticSearch(text, sessionary, firstname, lastname, countr);
 		}
 	}
     } catch (Exception e) {

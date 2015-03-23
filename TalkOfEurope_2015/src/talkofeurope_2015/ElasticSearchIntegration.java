@@ -32,38 +32,40 @@ public class ElasticSearchIntegration {
     
     public void sendToElasticSearch(String text, String sessionday, String firstname, String lastname, String country){
 
-//        try {
-//            String url = elasticSearchURI_greek + commentID + "_" +sentenceID;
-//
-//            URL obj = new URL(url);
-//            HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
-//            conn.setDoOutput(true);
-//            conn.setRequestMethod("PUT");
-//            String data =  "{\"comment\": \""+commentID+"\","
-//                    + " \"sentence\": \""+sentenceID+"\","
-//                    + " \"document\": \""+document+"\"}";
-//            
-//            try {
-//                OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
-//                out.write(data);
-//                out.close();
-//            }
-//            catch(Exception e){
-//                e.printStackTrace();
-//            }
-//
-//            String line = "";
-//            BufferedReader in = new BufferedReader(new 
-//                                     InputStreamReader(conn.getInputStream()));
-//            
-//            while ((line = in.readLine()) != null) {
-//                System.out.println(line);
-//            }
-//            in.close();
-//            
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            String url = elasticSearchURI_greek + sessionday;
+
+            URL obj = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("PUT");
+            String data =  "{\"text\": \""+text+"\","
+                    + " \"sessionday\": \""+sessionday+"\","
+                    + " \"firstname\": \""+firstname+"\","
+                    + " \"lastname\": \""+lastname+"\","
+                    + " \"country\": \""+country+"\"}";
+            
+            try {
+                OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+                out.write(data);
+                out.close();
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+            String line = "";
+            BufferedReader in = new BufferedReader(new 
+                                     InputStreamReader(conn.getInputStream()));
+            
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+            in.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     
