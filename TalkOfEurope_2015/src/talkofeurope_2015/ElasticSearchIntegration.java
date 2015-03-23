@@ -20,7 +20,8 @@ import tools.parsing.org.json.JSONObject;
  */
 public class ElasticSearchIntegration {
     
-    private final String elasticSearchURI = "http://localhost:9200/comments/sentences/";
+    private final String elasticSearchURI_greek = "http://localhost:9200/talkofeurope/greek";
+    private final String elasticSearchURI_english= "http://localhost:9200/talkofeurope/english";
     private final String elasticSearchQueryURI = "http://localhost:9200/_all/_search?";
     
     public int length;
@@ -32,7 +33,7 @@ public class ElasticSearchIntegration {
     public void sendToElasticSearch(String commentID, int sentenceID, String document){
 
         try {
-            String url = elasticSearchURI + commentID + "_" +sentenceID;
+            String url = elasticSearchURI_greek + commentID + "_" +sentenceID;
 
             URL obj = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
