@@ -6,6 +6,7 @@
 package talkofeurope_2015;
 
 import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 /**
@@ -26,7 +27,7 @@ public class TalkOfEurope_2015 {
 //        xmlParser.parseit(es);
     }
     
-    public static void executeQ() throws SAXException{
+    public static void executeQ() throws SAXException, ParserConfigurationException, IOException{
         ElasticSearchIntegration es= new ElasticSearchIntegration();
         
         System.out.println(GoogleTranslate.translate(ParsingLemmas.xml_search_rule1("docs/test.xml")));
@@ -39,7 +40,7 @@ public class TalkOfEurope_2015 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SAXException {
+    public static void main(String[] args) throws SAXException, ParserConfigurationException, IOException {
 //        loadEnglishDocsToElasticSearch();
         executeQ();
     }
