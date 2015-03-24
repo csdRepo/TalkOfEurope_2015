@@ -69,7 +69,7 @@ public class ParsingLemmas {
 
                 }
             }
-
+            System.out.println("sentence");
             document.add(sentence);
         }
       return document;
