@@ -23,11 +23,18 @@ public class TalkOfEurope_2015 {
 //        xmlParser.parseit(es);
     }
     
+    public static void executeQ(){
+        ElasticSearchIntegration es= new ElasticSearchIntegration();
+        
+        es.executeQuery(es.queryBuilder("madam president honourable member remark inform representative poland lithuania"));
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        loadEnglishDocsToElasticSearch();
+//        loadEnglishDocsToElasticSearch();
+        executeQ();
     }
     
 }

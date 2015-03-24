@@ -114,7 +114,7 @@ public class ElasticSearchIntegration {
     }
     
     
-    private double executeQuery(String query){
+    public double executeQuery(String query){
 
         double score = 0.0;
         
@@ -145,6 +145,8 @@ public class ElasticSearchIntegration {
                 json = json + line + " ";
             }
 
+            System.out.println(json);
+            
             JSONObject jsonObj = new JSONObject(json);
             try{
                 score = jsonObj.getJSONObject("hits").getDouble("max_score");
@@ -170,13 +172,12 @@ public class ElasticSearchIntegration {
 
     
     
-    private String queryBuilder(String commentID, int sentenceID, String query){
-        String q = "{\"query\":{\"filtered\":{\"query\":{\"bool\":{\"should\":[{\"query_string\":{\"query\":\""+query
-                +"\"}}]}},\"filter\":{\"bool\":{\"must\":[{\"fquery\":{\"query\":{\"query_string\":{\"query\":\"comment:(\\\""
-                +commentID+"\\\")\"}},\"_cache\":true}},{\"fquery\":{\"query\":{\"query_string\":{\"query\":\"sentence:(\\\""
-                +sentenceID+"\\\")\"}},\"_cache\":true}}],\"must_not\":[{\"fquery\":{\"query\":{\"query_string\":{\"query\":\"Qst\"}},\"_cache\":true}}]}}}},"
-                +"\"highlight\":{\"fields\":{},\"fragment_size\":2147483647,\"pre_tags\":[\"@start-highlight@\"],\"post_tags\":[\"@end-highlight@\"]},\"size\":500,"
-                +"\"sort\":[{\"_score\":{\"order\":\"desc\",\"ignore_unmapped\":true}}]}";
+    public String queryBuilder(String query){
+        String q = "{\"facets\":{\"terms\":{\"terms\":{\"field\":\"_type\",\"size\":10,\"order\":\"count\","
+                + "\"exclude\":[]},\"facet_filter\":{\"fquery\":{\"query\":{\"filtered\":{\"query\":{\"bool\":"
+                + "{\"should\":[{\"query_string\":{\"query\":"
+                + "\""+query+"\""
+                + "}}]}},\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"_type\":[\"english\"]}}]}}}}}}}},\"size\":0}";
         return q;
     }
 }
