@@ -31,10 +31,10 @@ public class xmlParser {
           
    
   public static void parseit(ElasticSearchIntegration el, String path) throws IOException{  
-    init_stopWord();
+    
+      init_stopWord();
+    
     try {
-      //  ElasticSearchIntegration el=new ElasticSearchIntegration();
-        //String delimiter = "\t\n\r\f!@#$%^&*;:'\".,0123456789()_-[]{}<>?|~`+-=/ \'\b«»§΄―—’‘–°· \\� ";
 	File fXmlFile = new File(path);
 	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -46,11 +46,8 @@ public class xmlParser {
 	NodeList nList = doc.getElementsByTagName("tuple");
 
 	for (int temp = 0; temp < nList.getLength(); temp++) {
- 
 		Node nNode = nList.item(temp);
- 
 		System.out.println("\nCurrent Element :" + nNode.getNodeName());
-            
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
  
 			Element eElement = (Element) nNode;
@@ -62,9 +59,10 @@ public class xmlParser {
                         String lastname=eElement.getElementsByTagName("literal").item(2).getTextContent();
                         String countr=eElement.getElementsByTagName("literal").item(3).getTextContent();
                         sessionary=sessionary.substring(sessionary.lastIndexOf("/")+1);
-			//System.out.println("Salary : " + eElement.getElementsByTagName("literal").item(1).getTextContent());
+                        
+                        
                         el.sendToElasticSearch_en(text, sessionary, firstname, lastname, countr);
-//                      System.out.println(text +"\n"+sessionary +"\n"+firstname +"\n"+lastname );
+
 		}
 	}
     } catch (ParserConfigurationException e) {
@@ -78,7 +76,6 @@ public class xmlParser {
       }
   }
     public static String cropNcut(String str) throws FileNotFoundException, IOException{
-      //  HashSet<String> stopWords= new HashSet<String>();
         String delimiter = "\t\n\r\f!@#$%^&*;:'\".,0123456789()_-[]{}<>?|~`+-=/ \'\b«»§΄―—’‘–°· \\� ";
        
 
@@ -97,16 +94,12 @@ public static void init_stopWord() throws FileNotFoundException, IOException{
         
     BufferedReader br = new BufferedReader(new FileReader("words/stopwordsEn.txt"));
     try {
-            //StringBuilder sb = new StringBuilder();
-        String term = br.readLine();
-            
+        String term = br.readLine();            
         stopWords.add(term);
         while (term != null) {
-           // System.out.println(term);
         term = br.readLine();
         stopWords.add(term);
         }
-           //String everything = sb.toString();
       } 
         finally {
            br.close();
