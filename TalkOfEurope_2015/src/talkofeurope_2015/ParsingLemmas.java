@@ -58,30 +58,33 @@ public class ParsingLemmas {
             String sentence = "";
 
             boolean found = false;
-
+            int i=0;
             for (int tmp2=0; tmp2<sList.getLength(); tmp2++){
-                int i=0;
+                
                 Node sNode=sList.item(tmp2);
 
                 if (sNode.getNodeType()==Node.ELEMENT_NODE){
                     Element sElement= (Element) sNode;
                    // System.out.println(sElement.getAttribute("wor"));
                    
-                    if (i < 50){
+                    if (i < 10){
                      sentence = sentence + sElement.getAttribute("lemma") + " ";
-                        System.out.println(sentence);
-                     i++;
+                       // System.out.println(sentence);
+                       // System.out.println(i+"\n");
+                        i++;
                     }
                     else{
                         document.add(sentence);
                         sentence= sElement.getAttribute("lemma")+ " ";
+                       /// System.out.println("peos");
                         i=0;
                         }
-                   // System.out.println(sentence);
+                 //  i++;// System.out.println(sentence);
                 }
             }
 
         }
+     //   System.out.println(document.size());
         return document;
     }
 }
