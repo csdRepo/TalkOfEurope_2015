@@ -6,6 +6,7 @@
 package talkofeurope_2015;
 
 import java.io.IOException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -25,9 +26,11 @@ public class TalkOfEurope_2015 {
 //        xmlParser.parseit(es);
     }
     
-    public static void executeQ(){
+    public static void executeQ() throws SAXException{
         ElasticSearchIntegration es= new ElasticSearchIntegration();
         
+        System.out.println(GoogleTranslate.translate(ParsingLemmas.xml_search_rule1("docs/test.xml")));
+//        GoogleTranslate.translate(ParsingLemmas.xml_search_rule1("docs/test.txt"))
         
         
 //        es.executeQuery(es.queryBuilder("madam president honourable member remark inform representative poland lithuania"));
@@ -36,7 +39,7 @@ public class TalkOfEurope_2015 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SAXException {
 //        loadEnglishDocsToElasticSearch();
         executeQ();
     }
