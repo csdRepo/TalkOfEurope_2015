@@ -21,9 +21,9 @@ import tools.parsing.org.json.JSONObject;
  */
 public class ElasticSearchIntegration {
     
-    private final String elasticSearchURI_greek = "http://localhost:9200/talkofeurope/greek";
-    private final String elasticSearchURI_english= "http://localhost:9200/talkofeurope/english";
-    private final String elasticSearchQueryURI = "http://localhost:9200/_all/_search?";
+    private final String elasticSearchURI_greek = "http://10.20.72.190:9200/talkofeurope/greek";
+    private final String elasticSearchURI_english= "http://10.20.72.190:9200/talkofeurope/english";
+    private final String elasticSearchQueryURI = "http://10.20.72.190:9200/_all/_search?";
     
     public int length;
     
@@ -34,10 +34,10 @@ public class ElasticSearchIntegration {
     public void sendToElasticSearch_en(String text, String sessionday, String firstname, String lastname, String country){
 
         Random rn = new Random();
-        int answer = rn.nextInt(1000) + 1;
+        int random = rn.nextInt(1000) + 1;
         
         try {
-            String url = elasticSearchURI_english + sessionday + "_" + firstname + "_" + lastname + "_" +answer;
+            String url = elasticSearchURI_english + sessionday + "_" + random;
 
             URL obj = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
@@ -74,8 +74,11 @@ public class ElasticSearchIntegration {
     
     public void sendToElasticSearch_el(String text, String sessionday, String firstname, String lastname, String country){
 
+        Random rn = new Random();
+        int random = rn.nextInt(1000) + 1;
+        
         try {
-            String url = elasticSearchURI_greek + sessionday;
+            String url = elasticSearchURI_english + sessionday + "_" + random;
 
             URL obj = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) obj.openConnection();

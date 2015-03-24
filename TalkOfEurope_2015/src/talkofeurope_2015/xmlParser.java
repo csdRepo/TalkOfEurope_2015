@@ -13,14 +13,18 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
+import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.DOMException;
+import org.xml.sax.SAXException;
  
 public class xmlParser {
    
-  public static void parseit(ElasticSearchIntegration el){  
+  public static void parseit(ElasticSearchIntegration el, String path){  
       
     try {
       //  ElasticSearchIntegration el=new ElasticSearchIntegration();
-	File fXmlFile = new File("/home/jmoschon/Desktop/talk of Europ/ours/talkofeurope.xml");
+	File fXmlFile = new File(path);
 	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 	Document doc = dBuilder.parse(fXmlFile);
@@ -54,9 +58,15 @@ public class xmlParser {
                         el.sendToElasticSearch_en(text, sessionary, firstname, lastname, countr);
 		}
 	}
-    } catch (Exception e) {
+    } catch (ParserConfigurationException e) {
 	e.printStackTrace();
-    }
+    } catch (SAXException e) {
+        e.printStackTrace();
+      } catch (IOException e) {
+          e.printStackTrace();
+      } catch (DOMException e) {
+          e.printStackTrace();
+      }
   }
  
 }

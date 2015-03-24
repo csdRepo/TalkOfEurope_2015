@@ -11,13 +11,23 @@ package talkofeurope_2015;
  */
 public class TalkOfEurope_2015 {
 
+    
+    public static void loadEnglishDocsToElasticSearch(){
+        ElasticSearchIntegration es= new ElasticSearchIntegration();
+        String path = "/home/jmoschon/Desktop/talk of Europ/ours/talkofeurope.xml";
+        xmlParser.parseit(es, path);
+    }
+    
+    public static void loadGreekDocsToElasticSearch(){
+        ElasticSearchIntegration es= new ElasticSearchIntegration();
+//        xmlParser.parseit(es);
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ElasticSearchIntegration el= new ElasticSearchIntegration();
-        xmlParser.parseit(el);
-        // TODO code application logic here
+        loadEnglishDocsToElasticSearch();
     }
     
 }
