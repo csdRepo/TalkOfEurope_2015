@@ -6,7 +6,6 @@
 package talkofeurope_2015;
 
  
-import edu.stanford.nlp.util.logging.Redwood;
 import java.io.BufferedReader;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;

@@ -28,7 +28,9 @@ public class TalkOfEurope_2015 {
     public static void executeQ(){
         ElasticSearchIntegration es= new ElasticSearchIntegration();
         
-        es.executeQuery(es.queryBuilder("madam president honourable member remark inform representative poland lithuania"));
+        
+        
+//        es.executeQuery(es.queryBuilder("madam president honourable member remark inform representative poland lithuania"));
     }
     
     /**
