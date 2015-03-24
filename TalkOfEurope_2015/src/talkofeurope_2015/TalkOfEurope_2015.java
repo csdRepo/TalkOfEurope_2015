@@ -5,6 +5,8 @@
  */
 package talkofeurope_2015;
 
+import java.io.IOException;
+
 /**
  *
  * @author smyrgeorge
@@ -12,7 +14,7 @@ package talkofeurope_2015;
 public class TalkOfEurope_2015 {
 
     
-    public static void loadEnglishDocsToElasticSearch(){
+    public static void loadEnglishDocsToElasticSearch() throws IOException{
         ElasticSearchIntegration es= new ElasticSearchIntegration();
         String path = "/home/jmoschon/Desktop/talk of Europ/ours/talkofeurope.xml";
         xmlParser.parseit(es, path);
@@ -26,7 +28,7 @@ public class TalkOfEurope_2015 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         loadEnglishDocsToElasticSearch();
     }
     
