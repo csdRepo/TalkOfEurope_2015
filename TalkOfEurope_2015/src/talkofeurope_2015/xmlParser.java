@@ -51,16 +51,14 @@ public class xmlParser {
  
 			Element eElement = (Element) nNode;
                        // eElement.getElementsByTagName("literal");
-                        String text=cropNcut(eElement.getElementsByTagName("literal").item(0).getTextContent());
+                        String topic=cropNcut(eElement.getElementsByTagName("literal").item(0).getTextContent());
                        
                         String sessionary=eElement.getElementsByTagName("uri").item(0).getTextContent();
-                        String firstname=eElement.getElementsByTagName("literal").item(1).getTextContent();
-                        String lastname=eElement.getElementsByTagName("literal").item(2).getTextContent();
-                        String countr=eElement.getElementsByTagName("literal").item(3).getTextContent();
+          
                         sessionary=sessionary.substring(sessionary.lastIndexOf("/")+1);
                         
                         
-                        el.sendToElasticSearch_en(text, sessionary, firstname, lastname, countr);
+                        el.sendToElasticSearch_en(topic, sessionary);
 
 		}
 	}
