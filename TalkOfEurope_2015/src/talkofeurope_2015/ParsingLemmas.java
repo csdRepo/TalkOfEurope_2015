@@ -27,7 +27,8 @@ public class ParsingLemmas {
     
 
     /*xml_search_rule1: VbMnMp without lemma "καν"*/
-    public static String xml_search_rule1(File fXmlFile) throws SAXException {
+    public static String xml_search_rule1(String filePath) throws SAXException {
+        File fXmlFile = new File(filePath);
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = null;
