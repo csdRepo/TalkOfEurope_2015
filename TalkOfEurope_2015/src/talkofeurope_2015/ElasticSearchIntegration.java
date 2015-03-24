@@ -21,8 +21,8 @@ import tools.parsing.org.json.JSONObject;
  */
 public class ElasticSearchIntegration {
     
-    private final String elasticSearchURI_greek = "http://10.20.72.190:9200/talkofeurope/greek";
-    private final String elasticSearchURI_english= "http://10.20.72.190:9200/talkofeurope/english";
+    private final String elasticSearchURI_greek = "http://10.20.72.190:9200/talkofeurope/greek/";
+    private final String elasticSearchURI_english= "http://10.20.72.190:9200/talkofeurope/english/";
     private final String elasticSearchQueryURI = "http://10.20.72.190:9200/_all/_search?";
     
     public int length;
