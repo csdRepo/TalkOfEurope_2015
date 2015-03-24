@@ -65,18 +65,19 @@ public class ParsingLemmas {
 
                 if (sNode.getNodeType()==Node.ELEMENT_NODE){
                     Element sElement= (Element) sNode;
-
+                   // System.out.println(sElement.getAttribute("wor"));
                    
                     if (i < 50){
-                     sentence = sentence + sElement.getAttribute("lemmas") + " ";
+                     sentence = sentence + sElement.getAttribute("lemma") + " ";
+                        System.out.println(sentence);
                      i++;
                     }
                     else{
                         document.add(sentence);
-                        sentence= sElement.getAttribute("lemmas")+ " ";
+                        sentence= sElement.getAttribute("lemma")+ " ";
                         i=0;
                         }
-                    System.out.println(sentence);
+                   // System.out.println(sentence);
                 }
             }
 
