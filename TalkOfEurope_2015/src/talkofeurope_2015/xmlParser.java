@@ -6,6 +6,8 @@
 package talkofeurope_2015;
 
  
+import edu.stanford.nlp.util.logging.Redwood;
+import java.io.BufferedReader;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
@@ -13,19 +15,26 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.StringTokenizer;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
  
 public class xmlParser {
+  
+    private static final HashSet<String> stopWords= new HashSet<String>();
+
+          
    
-  public static void parseit(ElasticSearchIntegration el, String path){  
-      
+  public static void parseit(ElasticSearchIntegration el, String path) throws IOException{  
+    
+      init_stopWord();
+    
     try {
-      //  ElasticSearchIntegration el=new ElasticSearchIntegration();
-        //String delimiter = "\t\n\r\f!@#$%^&*;:'\".,0123456789()_-[]{}<>?|~`+-=/ \'\b«»§΄―—’‘–°· \\� ";
 	File fXmlFile = new File(path);
 	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -37,25 +46,23 @@ public class xmlParser {
 	NodeList nList = doc.getElementsByTagName("tuple");
 
 	for (int temp = 0; temp < nList.getLength(); temp++) {
- 
 		Node nNode = nList.item(temp);
- 
 		System.out.println("\nCurrent Element :" + nNode.getNodeName());
-            
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
  
 			Element eElement = (Element) nNode;
                        // eElement.getElementsByTagName("literal");
-                        String text=eElement.getElementsByTagName("literal").item(0).getTextContent();
+                        String text=cropNcut(eElement.getElementsByTagName("literal").item(0).getTextContent());
                        
                         String sessionary=eElement.getElementsByTagName("uri").item(0).getTextContent();
                         String firstname=eElement.getElementsByTagName("literal").item(1).getTextContent();
                         String lastname=eElement.getElementsByTagName("literal").item(2).getTextContent();
                         String countr=eElement.getElementsByTagName("literal").item(3).getTextContent();
                         sessionary=sessionary.substring(sessionary.lastIndexOf("/")+1);
-			//System.out.println("Salary : " + eElement.getElementsByTagName("literal").item(1).getTextContent());
-                        el.sendToElasticSearch_en(cropNcut(text), sessionary, firstname, lastname, countr);
-                      //System.out.println(cropNcut(text) +"\n"+sessionary +"\n"+firstname +"\n"+lastname );
+                        
+                        
+                        el.sendToElasticSearch_en(text, sessionary, firstname, lastname, countr);
+
 		}
 	}
     } catch (ParserConfigurationException e) {
@@ -68,20 +75,35 @@ public class xmlParser {
           e.printStackTrace();
       }
   }
-    public static String cropNcut(String str){
-                    
+    public static String cropNcut(String str) throws FileNotFoundException, IOException{
         String delimiter = "\t\n\r\f!@#$%^&*;:'\".,0123456789()_-[]{}<>?|~`+-=/ \'\b«»§΄―—’‘–°· \\� ";
+       
+
         StringTokenizer tok = new StringTokenizer(str, delimiter, true);
         String new_str = " ";          
       
             while (tok.hasMoreTokens()){
                 String token = tok.nextToken();
-                if(token.length()>1)
+                if(token.length()>1 && !stopWords.contains(token))
                     new_str=new_str + " " + token.toLowerCase();
             }
         return new_str;
     }
 
-
+public static void init_stopWord() throws FileNotFoundException, IOException{
+        
+    BufferedReader br = new BufferedReader(new FileReader("words/stopwordsEn.txt"));
+    try {
+        String term = br.readLine();            
+        stopWords.add(term);
+        while (term != null) {
+        term = br.readLine();
+        stopWords.add(term);
+        }
+      } 
+        finally {
+           br.close();
+     }
+}
 
 }
