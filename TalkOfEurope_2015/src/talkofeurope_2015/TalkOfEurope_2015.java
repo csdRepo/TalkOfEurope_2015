@@ -41,8 +41,8 @@ public class TalkOfEurope_2015 {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-        loadEnglishDocsToElasticSearch();
-        loadGreekDocsToElasticSearch();
+//        loadEnglishDocsToElasticSearch();
+//        loadGreekDocsToElasticSearch();
 //        executeQ();
     }
     
