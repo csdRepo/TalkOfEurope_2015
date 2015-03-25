@@ -59,7 +59,8 @@ public class xmlParser {
                         
                         
                         el.sendToElasticSearch_en(topic, sessionary, Stemmer.Stem(topic));
-
+                        //smurno gamiesai
+                        
 		}
 	}
     } catch (ParserConfigurationException | SAXException | IOException | DOMException e) {
