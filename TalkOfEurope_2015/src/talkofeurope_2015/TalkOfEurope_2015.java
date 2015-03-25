@@ -18,7 +18,7 @@ public class TalkOfEurope_2015 {
         ElasticSearchIntegration es= new ElasticSearchIntegration();
 //        String path = "/home/jmoschon/Desktop/talk of Europ/ours/talkofeurope.xml";
         String path = "docs/talk_of_eu_topics_gr.xml";
-        xmlParser.parseit(es, path);
+        xmlParserGR.parseit(es, "/home/jmoschon/Desktop/talk of Europ/ours/xmlProcedures/xmlParsedes101218.txt.xml");
     }
     
     public static void loadGreekDocsToElasticSearch(){
