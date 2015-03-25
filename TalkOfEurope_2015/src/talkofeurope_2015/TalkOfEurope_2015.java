@@ -42,6 +42,7 @@ public class TalkOfEurope_2015 {
      */
     public static void main(String[] args) throws IOException {
         loadEnglishDocsToElasticSearch();
+        loadGreekDocsToElasticSearch();
 //        executeQ();
     }
     
