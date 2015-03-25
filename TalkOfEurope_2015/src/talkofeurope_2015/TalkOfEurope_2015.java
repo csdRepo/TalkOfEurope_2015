@@ -6,8 +6,6 @@
 package talkofeurope_2015;
 
 import java.io.IOException;
-import javax.xml.parsers.ParserConfigurationException;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -18,7 +16,8 @@ public class TalkOfEurope_2015 {
     
     public static void loadEnglishDocsToElasticSearch() throws IOException{
         ElasticSearchIntegration es= new ElasticSearchIntegration();
-        String path = "/home/jmoschon/Desktop/talk of Europ/ours/talkofeurope.xml";
+//        String path = "/home/jmoschon/Desktop/talk of Europ/ours/talkofeurope.xml";
+        String path = "docs/talk_of_eu_topics_gr.xml";
         xmlParser.parseit(es, path);
     }
     
@@ -27,22 +26,23 @@ public class TalkOfEurope_2015 {
 //        xmlParser.parseit(es);
     }
     
-    public static void executeQ() throws SAXException, ParserConfigurationException, IOException{
-        ElasticSearchIntegration es= new ElasticSearchIntegration();
-        
-        System.out.println(GoogleTranslate.translate(ParsingLemmas.xml_search_rule1("docs/test.xml")));
-//        GoogleTranslate.translate(ParsingLemmas.xml_search_rule1("docs/test.txt"))
-        
-        
-//        es.executeQuery(es.queryBuilder("madam president honourable member remark inform representative poland lithuania"));
-    }
+//    public static void executeQ() throws SAXException, ParserConfigurationException, IOException{
+//        ElasticSearchIntegration es= new ElasticSearchIntegration();
+//        
+//        System.out.println(GoogleTranslate.translate(ParsingLemmas.xml_search_rule1("docs/test.xml")));
+////        GoogleTranslate.translate(ParsingLemmas.xml_search_rule1("docs/test.txt"))
+//        
+//        
+////        es.executeQuery(es.queryBuilder("madam president honourable member remark inform representative poland lithuania"));
+//    }
     
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
-    public static void main(String[] args) throws SAXException, ParserConfigurationException, IOException {
-//        loadEnglishDocsToElasticSearch();
-        executeQ();
+    public static void main(String[] args) throws IOException {
+        loadEnglishDocsToElasticSearch();
+//        executeQ();
     }
     
 }

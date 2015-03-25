@@ -36,12 +36,12 @@ public class GoogleTranslate {
     public static String translate(ArrayList<String> doc){
         String text = "";
         
-        System.out.println(doc.size());
+//        System.out.println(doc.size());
         for(String sentence : doc){
-            System.out.println(sentence);
-//            Translator translate = Translator.getInstance();
-//            String translatedtext = translate.translate(sentence, Language.GREEK, Language.ENGLISH);
-//            text = text + " " +translatedtext;
+//            System.out.println(sentence);
+            Translator translate = Translator.getInstance();
+            String translatedtext = translate.translate(sentence, Language.GREEK, Language.ENGLISH);
+            text = text + " " +translatedtext;
         }
         
         return text;
