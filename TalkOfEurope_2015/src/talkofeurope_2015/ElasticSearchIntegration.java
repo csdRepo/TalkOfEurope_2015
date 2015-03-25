@@ -31,7 +31,7 @@ public class ElasticSearchIntegration {
         
     }
     
-    public void sendToElasticSearch_en(String text, String sessionday){
+    public void sendToElasticSearch_en(String text, String sessionday, String stemmedText){
 
         Random rn = new Random();
         int random = rn.nextInt(1000) + 1;
@@ -44,6 +44,7 @@ public class ElasticSearchIntegration {
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
             String data =  "{\"topic\": \""+text+"\","
+                    + " \"stemmed\": \""+stemmedText+"\","
                     + " \"session_day\": \""+sessionday+"\"}";
             
             try {
@@ -69,7 +70,7 @@ public class ElasticSearchIntegration {
         }
     }
     
-    public void sendToElasticSearch_el(String text, String sessionday){
+    public void sendToElasticSearch_el(String text, String sessionday, String stemmedText){
 
         Random rn = new Random();
         int random = rn.nextInt(1000) + 1;
@@ -82,6 +83,7 @@ public class ElasticSearchIntegration {
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
             String data =  "{\"text\": \""+text+"\","
+                    + " \"stemmed\": \""+stemmedText+"\","
                     + " \"sessionday\": \""+sessionday+"\"}";
             
             try {

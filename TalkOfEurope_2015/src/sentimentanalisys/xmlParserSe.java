@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package talkofeurope_2015;
+package sentimentanalisys;
 
  
 import java.io.BufferedReader;
@@ -23,13 +23,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
  
-public class xmlParser {
+public class xmlParserSe {
   
     private static final HashSet<String> stopWords= new HashSet<>();
 
           
    
-  public static void parseit(ElasticSearchIntegration el, String path) throws IOException{  
+  public static void parseit(StandfordNLP stnlp, String path) throws IOException{  
     
       init_stopWord();
     
@@ -50,15 +50,15 @@ public class xmlParser {
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
  
 			Element eElement = (Element) nNode;
-                       // eElement.getElementsByTagName("literal");
-                        String topic=cropNcut(eElement.getElementsByTagName("literal").item(0).getTextContent());
-                       
+//                        String topic=cropNcut(eElement.getElementsByTagName("literal").item(0).getTextContent());
+                        String topic=eElement.getElementsByTagName("literal").item(0).getTextContent();
                         String sessionary=eElement.getElementsByTagName("uri").item(0).getTextContent();
-          
                         sessionary=sessionary.substring(sessionary.lastIndexOf("/")+1);
                         
-                        
-                        el.sendToElasticSearch_en(topic, sessionary);
+//                        System.out.println(topic);
+//                        System.out.println(sessionary); 
+                       
+                        stnlp.sentimentAnalysis(topic);
 
 		}
 	}
@@ -83,14 +83,18 @@ public class xmlParser {
 
 public static void init_stopWord() throws FileNotFoundException, IOException{
         
-    try (BufferedReader br = new BufferedReader(new FileReader("words/stopwordsEn.txt"))) {
+    BufferedReader br = new BufferedReader(new FileReader("words/stopwordsEn.txt"));
+    try {
         String term = br.readLine();            
         stopWords.add(term);
         while (term != null) {
         term = br.readLine();
         stopWords.add(term);
         }
-      }
+      } 
+        finally {
+           br.close();
+     }
 }
 
 }
