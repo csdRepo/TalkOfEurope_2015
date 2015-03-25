@@ -6,6 +6,8 @@
 
 package sentimentanalisys;
 
+import java.io.IOException;
+
 /**
  *
  * @author smyrgeorge
@@ -15,12 +17,14 @@ public class SentimentAnalysis {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
         StandfordNLP stnlp = new StandfordNLP();
         
-        stnlp.sentimentAnalysis("the movie was boring");
-        stnlp.sentimentAnalysis("the movie was great");
+        xmlParserSe.parseit(stnlp, "docs/2009.xml");
+        
+//        stnlp.sentimentAnalysis("the movie was boring");
+//        stnlp.sentimentAnalysis("the movie was great");
         
     }
     
