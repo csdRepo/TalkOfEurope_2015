@@ -21,7 +21,7 @@ import tools.parsing.org.json.JSONObject;
  */
 public class ElasticSearchIntegration {
     
-    private final String elasticSearchURI_greek = "http://10.20.72.190:9200/talkofeurope/greek/";
+    private final String elasticSearchURI_greek = "http://10.20.72.190:9200/talkofeurope/gr_topics_gr/";
     private final String elasticSearchURI_english= "http://10.20.72.190:9200/talkofeurope/eu_topics_gr/";
     private final String elasticSearchQueryURI = "http://10.20.72.190:9200/_all/_search?";
     
@@ -69,23 +69,20 @@ public class ElasticSearchIntegration {
         }
     }
     
-    public void sendToElasticSearch_el(String text, String sessionday, String firstname, String lastname, String country){
+    public void sendToElasticSearch_el(String text, String sessionday){
 
         Random rn = new Random();
         int random = rn.nextInt(1000) + 1;
         
         try {
-            String url = elasticSearchURI_english + sessionday + "_" + random;
+            String url = elasticSearchURI_greek + sessionday + "_" + random;
 
             URL obj = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
             String data =  "{\"text\": \""+text+"\","
-                    + " \"sessionday\": \""+sessionday+"\","
-                    + " \"firstname\": \""+firstname+"\","
-                    + " \"lastname\": \""+lastname+"\","
-                    + " \"country\": \""+country+"\"}";
+                    + " \"sessionday\": \""+sessionday+"\"}";
             
             try {
                 OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
