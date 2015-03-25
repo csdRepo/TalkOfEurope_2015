@@ -22,7 +22,7 @@ import java.util.StringTokenizer;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
- 
+import mitos.stemmer.*;
 public class xmlParser {
   
     private static final HashSet<String> stopWords= new HashSet<>();
@@ -38,7 +38,7 @@ public class xmlParser {
 	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 	Document doc = dBuilder.parse(fXmlFile);
- 
+        Stemmer.Initialize();
 
 	doc.getDocumentElement().normalize();
 
@@ -58,7 +58,7 @@ public class xmlParser {
                         sessionary=sessionary.substring(sessionary.lastIndexOf("/")+1);
                         
                         
-                        el.sendToElasticSearch_en(topic, sessionary);
+                        el.sendToElasticSearch_en(topic, sessionary, Stemmer.Stem(topic));
 
 		}
 	}

@@ -113,7 +113,7 @@ public class xmlParserGR {
                         Element sElement= (Element) sNode;
                         System.out.println(sElement.getAttribute("topic"));
                         el.sendToElasticSearch_el(sElement.getAttribute("topic")
-                                ,Stemmer.Stem(sElement.getAttribute("topic")), editedDate);
+                                , editedDate,Stemmer.Stem(sElement.getAttribute("topic")));
                     }
                 }
                 
