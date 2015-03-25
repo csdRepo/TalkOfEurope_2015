@@ -5,6 +5,7 @@
  */
 package talkofeurope_2015;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -21,8 +22,17 @@ public class TalkOfEurope_2015 {
         xmlParserGR.parseit(es, "/home/jmoschon/Desktop/talk of Europ/ours/xmlProcedures/xmlParsedes101218.txt.xml");
     }
     
-    public static void loadGreekDocsToElasticSearch(){
+    public static void loadGreekDocsToElasticSearch() throws IOException{
+        final File folder = new File("/home/jmoschon/Desktop/talk of Europ/ours/xmlProcedures");
         ElasticSearchIntegration es= new ElasticSearchIntegration();
+        
+        for (final File fileEntry : folder.listFiles()) {
+
+                System.out.println(fileEntry.getName());
+                xmlParserGR.parseit(es, fileEntry.getAbsolutePath());
+            
+        }
+        //xmlParserGR.parseit(es, "/home/jmoschon/Desktop/talk of Europ/ours/xmlProcedures/xmlParsedes101218.txt.xml");
 //        xmlParser.parseit(es);
     }
     
@@ -42,7 +52,7 @@ public class TalkOfEurope_2015 {
      */
     public static void main(String[] args) throws IOException {
 //        loadEnglishDocsToElasticSearch();
-//        loadGreekDocsToElasticSearch();
+        loadGreekDocsToElasticSearch();
 //        executeQ();
     }
     
