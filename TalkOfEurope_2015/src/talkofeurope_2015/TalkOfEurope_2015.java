@@ -5,8 +5,11 @@
  */
 package talkofeurope_2015;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import mitos.stemmer.Stemmer;
 
 /**
  *
@@ -19,7 +22,7 @@ public class TalkOfEurope_2015 {
         ElasticSearchIntegration es= new ElasticSearchIntegration();
 //        String path = "/home/jmoschon/Desktop/talk of Europ/ours/talkofeurope.xml";
         String path = "docs/talk_of_eu_topics_gr.xml";
-        xmlParserGR.parseit(es, "/home/jmoschon/Desktop/talk of Europ/ours/xmlProcedures/xmlParsedes101218.txt.xml");
+        xmlParser.parseit(es, path);
     }
     
     public static void loadGreekDocsToElasticSearch() throws IOException{
@@ -46,14 +49,32 @@ public class TalkOfEurope_2015 {
 ////        es.executeQuery(es.queryBuilder("madam president honourable member remark inform representative poland lithuania"));
 //    }
     
+    public static void stemThat ( String str){
+        String str1="";
+        String splited[]=str.split(" ");
+        for (String splited1 : splited) {
+            str1=str1+" "+Stemmer.Stem(splited1);
+        }
+        System.err.println(str1);
+    
+    }
+    
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-//        loadEnglishDocsToElasticSearch();
+        loadEnglishDocsToElasticSearch();
         loadGreekDocsToElasticSearch();
 //        executeQ();
+        
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        Stemmer.Initialize();
+//        String current;
+//         while((current=br.readLine())!=null){
+//             stemThat(current);
+//         }
+//         
     }
     
 }

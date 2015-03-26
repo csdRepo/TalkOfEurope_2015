@@ -58,7 +58,7 @@ public class xmlParser {
                         sessionary=sessionary.substring(sessionary.lastIndexOf("/")+1);
                         
                         
-                        el.sendToElasticSearch_en(topic, sessionary, Stemmer.Stem(topic));
+                        el.sendToElasticSearch_en(topic, sessionary, stemThat(topic));
                         //smurno gamiesai
                         
 		}
@@ -82,6 +82,17 @@ public class xmlParser {
         return new_str;
     }
 
+        public static String stemThat ( String str){
+        String str1="";
+        String splited[]=str.split(" ");
+        for (String splited1 : splited) {
+            str1=str1+" "+Stemmer.Stem(splited1);
+        }
+        return str1;
+    
+    }
+    
+    
 public static void init_stopWord() throws FileNotFoundException, IOException{
         
     try (BufferedReader br = new BufferedReader(new FileReader("words/stopwordsEn.txt"))) {

@@ -113,7 +113,7 @@ public class xmlParserGR {
                         Element sElement= (Element) sNode;
                         System.out.println(sElement.getAttribute("topic"));
                         el.sendToElasticSearch_el(sElement.getAttribute("topic")
-                                , editedDate,Stemmer.Stem(sElement.getAttribute("topic")));
+                                , editedDate,stemThat(sElement.getAttribute("topic")));
                     }
                 }
                 
@@ -130,5 +130,16 @@ public class xmlParserGR {
           e.printStackTrace();
       }
   }
+ 
+     public static String stemThat ( String str){
+        String str1="";
+        String splited[]=str.split(" ");
+        for (String splited1 : splited) {
+            str1=str1+" "+Stemmer.Stem(splited1);
+        }
+        return str1;
+    
+    }
+    
     
 }
