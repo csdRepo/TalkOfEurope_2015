@@ -34,7 +34,8 @@ public class StandfordNLP {
         List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
         for (CoreMap sentence : sentences) {
             String sentiment = sentence.get(SentimentCoreAnnotations.ClassName.class);
-            System.out.println(sentiment + ":\t"+sentence);
+//            System.out.println(sentiment + ":\t"+sentence);
+            System.out.println(sentiment);
 //            System.out.println(sentence);
         }
     }
